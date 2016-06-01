@@ -1,0 +1,54 @@
+{
+	"jpsVersion": "0.2",
+	"jpsType": "install",
+	"result": 0,
+	"application": {
+		"id": "gitblit",
+		"name": "Gitblit",
+		"version": "1.5.1",
+		"logo": "https://raw.githubusercontent.com/JelasticJPS/Gitblit/master/images/70x70_02.png",
+		"type": "java",
+		"homepage": "http://gitblit.com",
+		"categories": ["apps/dev-tools", "apps/dev-and-admin-tools"],
+		"description": {
+			"en": "Gitblit is an open-source, pure Java stack for managing, viewing, and serving Git repositories. It's designed primarily as a tool for small workgroups who want to host centralized repositories"
+		},
+
+		"env": {
+			"topology": {
+				"ha": false,
+				"engine": "java7",
+				"ssl": true,
+				"nodes": [{
+						"extip": false,
+						"count": 1,
+						"cloudlets": 16,
+						"nodeType": "tomcat7"
+					}
+				]
+			},
+			"deployments": [{
+					"archive": "http://dl.gitblit.com/latest.war",
+					"name": "gitblit.war",
+					"context": "ROOT"
+				}
+			],
+			"upload": [],
+			"configs": [{
+					"nodeType": "tomcat7",
+					"restart": true,
+					"path": "${SERVER_CONF}/context.xml",
+					"replacements": [{
+							"pattern": "</Context>",
+							"replacement": "<Environment name=\"baseFolder\" type=\"java.lang.String\" value=\"/opt/tomcat/temp/gitblit-data\" override=\"false\" /></Context>"
+						}
+					]
+				}
+			]
+		},
+		"success": {
+			"text": "Below you will find your admin panel link, username and password.</br></br> <table style='font-size:13px; border: none;'><tr><td>Admin panel URL:</td><td style='padding-left: 10px;'><a href='${env.protocol}://${env.domain}/' target='_blank'>${env.protocol}://${env.domain}/</a></td></tr> <tr><td>Username:</td><td style='padding-left: 10px;'>admin</td></tr><tr><td>Password:</td><td style='padding-left: 10px;'>admin</td></tr></table></br>To add custom domain name for your Gitblit installation follow the steps described in our <a href='http://jelastic.com/docs/custom-domains' target='_blank'>documentation</a>",
+			"email": "Below you will find your admin panel link, username and password.</br></br> <table style='font-size:13px; border: none;'><tr><td>Admin panel URL:</td><td style='padding-left: 10px;'><a href='${env.protocol}://${env.domain}/' target='_blank'>${env.protocol}://${env.domain}/</a></td></tr> <tr><td>Username:</td><td style='padding-left: 10px;'>admin</td></tr><tr><td>Password:</td><td style='padding-left: 10px;'>admin</td></tr></table></br>To add custom domain name for your Gitblit installation follow the steps described in our <a href='http://jelastic.com/docs/custom-domains' target='_blank'>documentation</a>"
+		}
+	}
+}
