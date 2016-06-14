@@ -6,7 +6,7 @@
 		"id": "gitblit",
 		"name": "Gitblit",
 		"version": "1.5.1",
-		"logo": "https://raw.githubusercontent.com/JelasticJPS/Gitblit/master/images/70x70_02.png",
+		"logo": "https://raw.githubusercontent.com/jelastic-jps/Gitblit/master/images/70x70_02.png",
 		"type": "java",
 		"homepage": "http://gitblit.com",
 		"categories": ["apps/dev-tools", "apps/dev-and-admin-tools"],
