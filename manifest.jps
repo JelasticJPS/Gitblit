@@ -27,7 +27,7 @@ onInstall:
     name: gitblit-${globals.version_gitblit}.war
     context: ROOT
 - replaceInFile:
-    - path: ${SERVER_CONF}/context.xml
+    - path:  /opt/tomcat/conf/context.xml
       nodeType: tomcat9
       replacements:
       - pattern: "</Context>"
