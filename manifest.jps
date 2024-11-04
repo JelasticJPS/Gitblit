@@ -11,18 +11,15 @@ description: Gitblit is an open-source, pure Java stack for managing, viewing, a
   serving Git repositories. It's designed primarily as a tool for small workgroups
   who want to host centralized repositories
 
-baseUrl: https://raw.githubusercontent.com/sych74/gitblit/master/
-mixins:
-  - configs/vers.yaml
-
 globals:
+  version_gitblit: 1.9.3
   ADMIN_PASS: ${fn.password}
   
-engine: openjdk8
+engine: openjdk11
 ssl: true
 nodes:
 - cloudlets: 8
-  nodeType: tomcat
+  nodeType: tomcat9
 
 onInstall:
 - deploy:
@@ -31,13 +28,13 @@ onInstall:
     context: ROOT
 - replaceInFile:
     - path: ${SERVER_CONF}/context.xml
-      nodeType: tomcat
+      nodeType: tomcat9
       replacements:
       - pattern: "</Context>"
         replacement: <Environment name="baseFolder" type="java.lang.String" value="/opt/tomcat/temp/gitblit-data"
           override="false" /></Context>
     - path: /opt/tomcat/webapps/ROOT/WEB-INF/data/users.conf
-      nodeType: tomcat
+      nodeType: tomcat9
       replacements:
       - pattern: password =.*
         replacement: password = ${globals.ADMIN_PASS}
