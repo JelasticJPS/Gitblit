@@ -10,11 +10,15 @@ categories:
 description: Gitblit is an open-source, pure Java stack for managing, viewing, and
   serving Git repositories. It's designed primarily as a tool for small workgroups
   who want to host centralized repositories
-  
+
+baseUrl: https://raw.githubusercontent.com/sych74/gitblit/master/
+mixins:
+  - configs/vers.yaml
+
 globals:
   ADMIN_PASS: ${fn.password}
   
-engine: java8
+engine: openjdk8
 ssl: true
 nodes:
 - cloudlets: 8
@@ -22,8 +26,8 @@ nodes:
 
 onInstall:
 - deploy:
-    archive: https://github.com/gitblit/gitblit/releases/download/v1.9.1/gitblit-1.9.1.war
-    name: gitblit-1.9.1.war
+    archive: https://github.com/gitblit/gitblit/releases/download/v${globals.version_gitblit}/gitblit-${globals.version_gitblit}.war
+    name: gitblit-${globals.version_gitblit}.war
     context: ROOT
 - replaceInFile:
     - path: ${SERVER_CONF}/context.xml
